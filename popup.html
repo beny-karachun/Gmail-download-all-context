@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mailpack Local</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="icons/icon.svg" alt="">
+        </div>
+        <div>
+          <h1>Mailpack Local</h1>
+          <p>Gmail context, packed for your AI</p>
+        </div>
+        <button class="icon-button" id="refreshButton" type="button" aria-label="Rescan selected conversations" title="Rescan">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 11a8.1 8.1 0 0 0-15.5-2M4 4v5h5M4 13a8.1 8.1 0 0 0 15.5 2M20 20v-5h-5"/>
+          </svg>
+        </button>
+      </header>
+
+      <section class="selection-card" aria-live="polite">
+        <div class="count-orb" id="countOrb">
+          <span id="selectionCount">–</span>
+        </div>
+        <div class="selection-copy">
+          <h2 id="selectionTitle">Checking Gmail…</h2>
+          <p id="selectionHint">Reading the conversations selected in this tab.</p>
+        </div>
+      </section>
+
+      <div class="thread-preview" id="threadPreview" hidden></div>
+
+      <section class="options" aria-labelledby="optionsTitle">
+        <h2 id="optionsTitle">Include in the ZIP</h2>
+
+        <label class="option-row">
+          <span class="option-icon attachment-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="m20.5 11.5-8.9 8.9a6 6 0 0 1-8.5-8.5l9.6-9.6a4 4 0 0 1 5.7 5.7l-9.6 9.6a2 2 0 1 1-2.8-2.8l8.9-8.9"/>
+            </svg>
+          </span>
+          <span class="option-copy">
+            <strong>Attachments</strong>
+            <small>Up to 30 MB per file</small>
+          </span>
+          <input id="includeAttachments" type="checkbox" checked>
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+
+        <label class="option-row">
+          <span class="option-icon code-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="m8 9-3 3 3 3M16 9l3 3-3 3M14 5l-4 14"/>
+            </svg>
+          </span>
+          <span class="option-copy">
+            <strong>Clean HTML copies</strong>
+            <small>Markdown is always included</small>
+          </span>
+          <input id="includeHtml" type="checkbox">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+      </section>
+
+      <div class="notice" id="notice" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 10v6M12 7h.01"/>
+        </svg>
+        <span id="noticeText"></span>
+      </div>
+
+      <button class="primary-button" id="exportButton" type="button" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>
+        </svg>
+        <span>Export selected</span>
+      </button>
+
+      <p class="privacy-note">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3 5 6v5c0 4.6 2.9 8.7 7 10 4.1-1.3 7-5.4 7-10V6l-7-3Z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        Your mail stays in Chrome. Nothing is uploaded.
+      </p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

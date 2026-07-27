@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Preparing Gmail context · Mailpack Local</title>
+    <link rel="stylesheet" href="export.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Mailpack Local">
+          <img src="icons/icon.svg" alt="">
+          <span>Mailpack Local</span>
+        </a>
+        <span class="local-pill">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3 5 6v5c0 4.6 2.9 8.7 7 10 4.1-1.3 7-5.4 7-10V6l-7-3Z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          Runs locally in Chrome
+        </span>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Private Gmail export</p>
+          <h1 id="pageTitle">Packing your context</h1>
+          <p class="lede" id="pageDescription">
+            Collecting each selected conversation into clean Markdown for your local AI.
+          </p>
+        </div>
+
+        <div class="status-card">
+          <div class="status-heading">
+            <div>
+              <span class="status-label" id="statusLabel">Preparing</span>
+              <strong id="statusText">Loading export job…</strong>
+            </div>
+            <span class="percent" id="percent">0%</span>
+          </div>
+
+          <div
+            class="progress-track"
+            id="progressTrack"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <div class="stats" id="stats">
+            <div>
+              <span>Conversations</span>
+              <strong id="threadStat">–</strong>
+            </div>
+            <div>
+              <span>Messages found</span>
+              <strong id="messageStat">0</strong>
+            </div>
+            <div>
+              <span>Files packed</span>
+              <strong id="fileStat">0</strong>
+            </div>
+          </div>
+
+          <div class="activity" id="activity" aria-live="polite"></div>
+
+          <div class="actions">
+            <button class="secondary-button" id="cancelButton" type="button">Cancel</button>
+            <button class="primary-button" id="downloadAgainButton" type="button" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>
+              </svg>
+              Download ZIP again
+            </button>
+            <button class="secondary-button" id="downloadsButton" type="button" hidden>
+              Open Downloads
+            </button>
+          </div>
+        </div>
+
+        <aside class="what-you-get">
+          <h2>Inside your ZIP</h2>
+          <div class="format-row">
+            <span class="format-icon markdown">MD</span>
+            <div>
+              <strong>all-context.md</strong>
+              <p>One AI-ready file with every conversation.</p>
+            </div>
+          </div>
+          <div class="format-row">
+            <span class="format-icon folders">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 6h7l2 2h9v10H3V6Z"/>
+              </svg>
+            </span>
+            <div>
+              <strong>Thread folders</strong>
+              <p>Individual Markdown, optional HTML, and attachments.</p>
+            </div>
+          </div>
+          <div class="format-row">
+            <span class="format-icon json">{ }</span>
+            <div>
+              <strong>manifest.json</strong>
+              <p>A machine-readable index of what was exported.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <footer>
+        Temporary Gmail tabs are opened in the background and closed after each conversation is packed.
+      </footer>
+    </main>
+    <script src="zip.js"></script>
+    <script src="export.js"></script>
+  </body>
+</html>
