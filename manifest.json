@@ -5,10 +5,10 @@
   "description": "Export selected Gmail conversations and attachments as a private, AI-ready ZIP.",
   "minimum_chrome_version": "102",
   "permissions": [
+    "activeTab",
     "downloads",
     "scripting",
-    "storage",
-    "tabs"
+    "storage"
   ],
   "host_permissions": [
     "https://mail.google.com/*"

@@ -1,0 +1,10 @@
+{
+  "name": "mailpack-local",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Export selected Gmail conversations as a private, AI-ready ZIP.",
+  "scripts": {
+    "test": "node scripts/validate.mjs",
+    "package": "node scripts/package.mjs"
+  }
+}

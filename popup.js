@@ -84,6 +84,9 @@ async function sendToGmail(tabId, message) {
   try {
     return await chrome.tabs.sendMessage(tabId, message);
   } catch (error) {
+    if (!/receiving end does not exist|could not establish connection/i.test(error.message || "")) {
+      throw error;
+    }
     await chrome.scripting.executeScript({
       target: { tabId },
       files: ["content.js"],

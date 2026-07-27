@@ -131,7 +131,9 @@
     const timeoutAt = Date.now() + 18_000;
     while (Date.now() < timeoutAt) {
       const routeMatches = !expectedThreadId || location.href.includes(expectedThreadId);
-      const hasThreadContent = document.querySelector(".hP, .a3s, [data-message-id]");
+      const hasThreadContent = document.querySelector(
+        ".hP, .a3s, [data-message-id], [data-legacy-message-id]",
+      );
       if (routeMatches && hasThreadContent) return;
       await sleep(250);
     }
@@ -142,10 +144,13 @@
     const main = document.querySelector('[role="main"]') || document.body;
 
     for (let pass = 0; pass < 3; pass += 1) {
-      const candidates = [...main.querySelectorAll(".adn .kv, .adn .kQ, [data-message-id] .kv")]
+      const candidates = [...main.querySelectorAll(".kv, .kQ")]
         .filter(isVisible)
+        .filter((element) => element.matches(".kv") || !element.querySelector(".kv"))
         .filter((element) => {
-          const message = element.closest(".adn, [data-message-id]");
+          const message = element.closest(
+            ".adn, [data-message-id], [data-legacy-message-id], .kQ",
+          );
           return message && !message.querySelector(".a3s");
         })
         .slice(0, 80);
@@ -287,7 +292,7 @@
     for (const bodyElement of bodyElements) {
       const container =
         bodyElement.closest(".adn") ||
-        bodyElement.closest("[data-message-id]") ||
+        bodyElement.closest("[data-message-id], [data-legacy-message-id]") ||
         bodyElement.parentElement;
       if (!container) continue;
 
@@ -297,11 +302,16 @@
       const sender = readEmailAddress(senderElement);
       const recipientElement = container.querySelector(".g2");
       const dateElement = container.querySelector(".g3[title], .g3");
-      const idElement = container.closest("[data-message-id]") || container.querySelector("[data-message-id]");
+      const idElement =
+        container.closest("[data-message-id], [data-legacy-message-id]") ||
+        container.querySelector("[data-message-id], [data-legacy-message-id]");
       const text = cleanBodyText(bodyElement.innerText || bodyElement.textContent);
 
       messages.push({
-        id: cleanInlineText(idElement?.getAttribute("data-message-id")),
+        id: cleanInlineText(
+          idElement?.getAttribute("data-message-id") ||
+          idElement?.getAttribute("data-legacy-message-id"),
+        ),
         fromName: sender.name,
         fromEmail: sender.email,
         to: cleanInlineText(recipientElement?.getAttribute("title") || recipientElement?.textContent),
